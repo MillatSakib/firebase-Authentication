@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase.init";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const LoginWithTrirdParty = () => {
   const [user, setUser] = useState([]);
@@ -18,14 +19,19 @@ const LoginWithTrirdParty = () => {
       });
   };
   return (
-    <div>
-      <button className="btn btn-primary" onClick={handleGoogleSignIn}>
-        Login
-      </button>
-      <h3>User: {user.displayName}</h3>
-      <p>Email: {user.email}</p>
-      <img src={user.photoURL}></img>
-    </div>
+    <HelmetProvider>
+      <div>
+        <Helmet>
+          <title>Auth | Login</title>
+        </Helmet>
+        <button className="btn btn-primary" onClick={handleGoogleSignIn}>
+          Login
+        </button>
+        <h3>User: {user.displayName}</h3>
+        <p>Email: {user.email}</p>
+        <img src={user.photoURL}></img>
+      </div>
+    </HelmetProvider>
   );
 };
 
